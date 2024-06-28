@@ -1,28 +1,89 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+## Backend de la aplicación de tareas con Flask y SQLAlchemy
 
-# Flask + Vercel
+Este proyecto implementa un backend para una aplicación de gestión de tareas utilizando Flask y SQLAlchemy. 
 
-This example shows how to use Flask 3 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+### Características
 
-## Demo
+* **Autenticación de usuarios:** Registro e inicio de sesión con seguridad mediante hashing de contraseñas.
+* **CRUD de tareas:** Permite crear, leer, actualizar y eliminar tareas.
+* **API RESTful:** Utiliza métodos HTTP (POST, GET, PUT, DELETE) para interactuar con los recursos.
+* **Base de datos PostgreSQL:** Almacena los datos de usuarios y tareas en una base de datos PostgreSQL.
 
-https://flask-python-template.vercel.app/
+### Instalación
 
-## How it Works
+1. Clona el repositorio:
 
-This example uses the Web Server Gateway Interface (WSGI) with Flask to enable handling requests on Vercel with Serverless Functions.
+   ```bash
+   git clone https://github.com/tu-usuario/tu-repositorio.git
+   ```
 
-## Running Locally
+2. Crea un entorno virtual:
+
+   ```bash
+   python3 -m venv env
+   ```
+
+3. Activa el entorno virtual:
+
+   * Linux/macOS: 
+     ```bash
+     source env/bin/activate
+     ```
+   * Windows:
+     ```bash
+     env\Scripts\activate
+     ```
+
+4. Instala las dependencias:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. Configura las variables de entorno:
+
+   * Crea un archivo `.env` en la raíz del proyecto.
+   * Define la variable `DATABASE_URL` con la URL de conexión a tu base de datos PostgreSQL. 
+     Por ejemplo:
+     ```
+     DATABASE_URL=postgresql://usuario:contraseña@localhost:5432/nombre_de_la_base_de_datos
+     ```
+   * Define la variable `SECRET_KEY` con una clave secreta aleatoria. 
+
+6. Crea las tablas en la base de datos:
+
+   ```bash
+   flask db upgrade 
+   ```
+
+### Ejecución
 
 ```bash
-npm i -g vercel
-vercel dev
+flask run
 ```
 
-Your Flask application is now available at `http://localhost:3000`.
+### Uso
 
-## One-Click Deploy
+La API RESTful se encuentra disponible en la ruta base del servidor, por ejemplo: `http://127.0.0.1:5000/`. Puedes utilizar herramientas como Postman o curl para interactuar con ella.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
+### Rutas de la API
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+| Ruta           | Método | Descripción                      | Autenticación |
+| -------------- | ------ | -------------------------------- | -------------- |
+| `/register`    | POST   | Registra un nuevo usuario      | No             |
+| `/login`       | POST   | Inicia sesión con un usuario   | No             |
+| `/logout`      | GET    | Cierra la sesión del usuario  | Sí              |
+| `/tasks`       | POST   | Crea una nueva tarea            | Sí              |
+| `/tasks`       | GET    | Obtiene todas las tareas        | Sí              |
+| `/tasks/<id>`  | GET    | Obtiene una tarea por ID       | Sí              |
+| `/tasks/<id>`  | PUT    | Actualiza una tarea por ID       | Sí              |
+| `/tasks/<id>`  | DELETE | Elimina una tarea por ID        | Sí              |
+
+### Notas
+
+* Este proyecto está en desarrollo y puede sufrir cambios.
+* Se recomienda utilizar un entorno virtual para evitar conflictos de dependencias.
+* Asegúrate de configurar correctamente las variables de entorno antes de ejecutar la aplicación.
+* Puedes consultar la documentación de Flask y SQLAlchemy para obtener más información sobre su uso.
+
+##### Alejandro Grimaldo
