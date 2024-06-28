@@ -224,10 +224,10 @@ def delete_task(task_id):
         return jsonify({"error": f"Error al eliminar la tarea: {e}"}), 500
 
 
-# Ruta de bienvenida
+# Ruta de bienvenida pagina html
 @app.route("/")
 def index():
-    return jsonify({"message": "Bienvenido a la API de tareas"}), 200
+    return redirect(url_for("static", filename="index.html"))
 
 
 if __name__ == "__main__":
