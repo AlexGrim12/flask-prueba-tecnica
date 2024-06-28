@@ -9,6 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import (
     wraps,
 )  # Importar wraps para preservar el nombre de la función original
+
 # env
 from dotenv import load_dotenv
 
@@ -17,9 +18,7 @@ app = Flask(__name__)
 # env
 load_dotenv()
 # Configuración de la base de datos
-app.config["SQLALCHEMY_DATABASE_URI"] = (
-    os.getenv("DATABASE_URL")
-)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = os.urandom(
     24
@@ -223,6 +222,12 @@ def delete_task(task_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": f"Error al eliminar la tarea: {e}"}), 500
+
+
+# Ruta de bienvenida
+@app.route("/")
+def index():
+    return jsonify({"message": "Bienvenido a la API de tareas"}), 200
 
 
 if __name__ == "__main__":
